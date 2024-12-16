@@ -11,7 +11,7 @@ namespace Lab
         T Divide(T b);
     }
 
-    class MyFrac
+    class MyFrac:IMyNumber<MyFrac>
     {
         private BigInteger nom;
         private BigInteger den;
@@ -47,6 +47,46 @@ namespace Lab
                 return $"-({BigInteger.Abs(nom)}/{BigInteger.Abs(den)})";
             else
                 return $"{nom}/{den}";
+        }
+
+        public MyFrac Add(MyFrac that)
+        {
+            return new MyFrac(nom*that.den+that.nom*den,den*that.den);
+        }
+
+        public MyFrac Subtract(MyFrac that)
+        {
+            return new MyFrac(nom * that.den - that.nom * den, den * that.den);
+        }
+
+        public MyFrac Multiply(MyFrac that)
+        {
+            return new MyFrac(nom * that.nom, den * that.den);
+        }
+
+        public MyFrac Divide(MyFrac that)
+        {
+            return new MyFrac(nom * that.den, den * that.nom);
+        }
+
+        public static MyFrac operator +(MyFrac f1,MyFrac f2)
+        {
+            return f1.Add(f2);
+        }
+
+        public static MyFrac operator -(MyFrac f1, MyFrac f2)
+        {
+            return f1.Substract(f2);
+        }
+
+        public static MyFrac operator *(MyFrac f1, MyFrac f2)
+        {
+            return f1.Multiply(f2);
+        }
+
+        public static MyFrac operator /(MyFrac f1, MyFrac f2)
+        {
+            return f1.Divide(f2);
         }
     }
 
