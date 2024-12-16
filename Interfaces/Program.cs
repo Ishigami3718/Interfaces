@@ -28,7 +28,7 @@ namespace Lab
         }
         public MyFrac(BigInteger nom, BigInteger den)
         {
-            if (den == 0) throw new Exception("denom is zero");
+            if (den == 0) throw new DivideByZeroException();
             BigInteger nsd = Evklid(nom, den);
             this.nom = nom/nsd;
             this.den = den/nsd;
@@ -107,7 +107,9 @@ namespace Lab
 
         public override string ToString()
         {
-            return real + "+" + imaginary+"i";
+            if (real == 0) return imaginary + "i";
+            else if (imaginary == 0) return real.ToString();
+            else return real + "+" + imaginary+"i";
         }
 
         public MyComplex Add(MyComplex that)
@@ -128,10 +130,14 @@ namespace Lab
 
         public MyComplex Divide(MyComplex that)
         {
-            return new MyComplex((real*that.real+imaginary*that.imaginary)/
-                (that.real*that.real+that.imaginary*that.imaginary),
-                (imaginary*that.real-real*that.imaginary)/
+            if (that.real == 0 && that.imaginary == 0) throw new DivideByZeroException();
+            else
+            {
+                return new MyComplex((real * that.real + imaginary * that.imaginary) /
+                (that.real * that.real + that.imaginary * that.imaginary),
+                (imaginary * that.real - real * that.imaginary) /
                 (that.real * that.real + that.imaginary * that.imaginary));
+            }
         }
 
         public static MyComplex operator +(MyComplex f1, MyComplex f2)
@@ -186,6 +192,7 @@ Console.WriteLine("2*a*b = " + curr);
             TestAPlusBSquare(new MyFrac(1, 3), new MyFrac(1, 6));
             TestAPlusBSquare(new MyComplex(1, 3), new MyComplex(1, 6));
             Console.ReadKey();
+            Console.WriteLine(new MyComplex(1, 5).Divide(new MyComplex(0,0)));
         }
     }
 }
