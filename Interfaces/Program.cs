@@ -90,7 +90,7 @@ namespace Lab
         }
     }
 
-    class MyComplex
+    class MyComplex:IMyNumber<MyComplex>
     {
         private double real;
         private double imaginary;
@@ -108,6 +108,30 @@ namespace Lab
         public override string ToString()
         {
             return real + "+" + imaginary+"i";
+        }
+
+        public MyComplex Add(MyComplex that)
+        {
+            return new MyComplex(real+that.real,imaginary+that.imaginary);
+        }
+
+        public MyComplex Subtract(MyComplex that)
+        {
+            return new MyComplex(real - that.real, imaginary - that.imaginary);
+        }
+
+        public MyComplex Multiply(MyComplex that)
+        {
+            return new MyComplex(real*that.real-imaginary*that.imaginary,
+                real*that.imaginary+imaginary*that.real);
+        }
+
+        public MyComplex Divide(MyComplex that)
+        {
+            return new MyComplex((real*that.real+imaginary*that.imaginary)/
+                (that.real*that.real+that.imaginary*that.imaginary),
+                (imaginary*that.real-real*that.imaginary)/
+                (that.real * that.real + that.imaginary * that.imaginary));
         }
     }
     class Program
