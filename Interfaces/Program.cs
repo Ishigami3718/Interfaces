@@ -34,7 +34,7 @@ namespace Lab
             this.den = den/nsd;
         }
 
-        public MyFrac(string inp) : this(long.Parse(inp.Split('/')[0]), BigInteger.Parse(inp.Split('/')[1]))
+        public MyFrac(string inp) : this(BigInteger.Parse(inp.Split('/')[0]), BigInteger.Parse(inp.Split('/')[1]))
         {
         }
 
@@ -132,6 +132,26 @@ namespace Lab
                 (that.real*that.real+that.imaginary*that.imaginary),
                 (imaginary*that.real-real*that.imaginary)/
                 (that.real * that.real + that.imaginary * that.imaginary));
+        }
+
+        public static MyComplex operator +(MyComplex f1, MyComplex f2)
+        {
+            return f1.Add(f2);
+        }
+
+        public static MyComplex operator -(MyComplex f1, MyComplex f2)
+        {
+            return f1.Subtract(f2);
+        }
+
+        public static MyComplex operator *(MyComplex f1, MyComplex f2)
+        {
+            return f1.Multiply(f2);
+        }
+
+        public static MyComplex operator /(MyComplex f1, MyComplex f2)
+        {
+            return f1.Divide(f2);
         }
     }
     class Program
