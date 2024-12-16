@@ -54,6 +54,21 @@ namespace Lab
     {
         private double real;
         private double imaginary;
+
+        public MyComplex(double real, double imaginary)
+        {
+            this.real = real;
+            this.imaginary = imaginary;
+        }
+
+        public MyComplex(string inp):this(double.Parse(inp.Split(new char[] {'+','i'},
+            StringSplitOptions.RemoveEmptyEntries)[0]), double.Parse(inp.Split(new char[] { '+', 'i' },
+            StringSplitOptions.RemoveEmptyEntries)[1])){ }
+
+        public override string ToString()
+        {
+            return real + "+" + imaginary+"i";
+        }
     }
     class Program
     {
