@@ -11,7 +11,7 @@ namespace Lab
         T Divide(T b);
     }
 
-    class MyFrac:IMyNumber<MyFrac>,IComparable<MyFrac>
+   public class MyFrac:IMyNumber<MyFrac>,IComparable<MyFrac>
     {
         private BigInteger nom;
         private BigInteger den;
@@ -104,9 +104,20 @@ namespace Lab
             else if(this<that) return -1;
             else return 0;
         }
+
+        public override bool Equals(object? obj)
+        {
+            MyFrac temp = obj as MyFrac;
+            return nom.Equals(temp.nom) && den.Equals(temp.den);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(nom,den);
+        }
     }
 
-    class MyComplex:IMyNumber<MyComplex>
+    public class MyComplex:IMyNumber<MyComplex>
     {
         private double real;
         private double imaginary;
@@ -176,7 +187,7 @@ namespace Lab
             return f1.Divide(f2);
         }
     }
-    class Program
+    public class Program
     {
         static void TestAPlusBSquare<T>(T a, T b) where T : IMyNumber<T>
         {
