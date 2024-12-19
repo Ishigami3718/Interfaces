@@ -186,6 +186,17 @@ namespace Lab
         {
             return f1.Divide(f2);
         }
+
+        public override bool Equals(object? obj)
+        {
+            MyComplex temp = obj as MyComplex;
+            return real.Equals(temp.real) && imaginary.Equals(temp.imaginary);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(real, imaginary);
+        }
     }
     public class Program
     {
