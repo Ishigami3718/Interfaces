@@ -12,7 +12,7 @@ namespace Lab.Tests
     public class Tests
     {
         [TestMethod]
-        public void Test1()
+        public void FTest1()
         {
             var f1 = new MyFrac("1/30");
             var f2 = new MyFrac("3/25");
@@ -31,13 +31,13 @@ namespace Lab.Tests
         }
 
         [TestMethod]
-        public void Test2()
+        public void FTest2()
         {
             var f1 = new MyFrac("1/4");
             var f2 = new MyFrac("1/6");
 
             var res = f1 + f2;
-            Assert.AreEqual(new MyFrac("7/12"), res);
+            Assert.AreEqual(new MyFrac("5/12"), res);
 
             var res1 = f1 - f2;
             Assert.AreEqual(new MyFrac("1/12"), res1);
@@ -49,7 +49,8 @@ namespace Lab.Tests
             Assert.AreEqual(new MyFrac("3/2"), res3);
         }
 
-        public void Test3()
+        [TestMethod]
+        public void FTest3()
         {
             var f1 = new MyFrac("-3/17");
             var f2 = new MyFrac("-6/-13");
@@ -67,7 +68,8 @@ namespace Lab.Tests
             Assert.AreEqual(new MyFrac("-13/34"), res3);
         }
 
-        public void Test4()
+        [TestMethod]
+        public void FTest4()
         {
             var f1 = new MyFrac("-3/17");
             var f2 = new MyFrac("6/-13");
@@ -85,5 +87,61 @@ namespace Lab.Tests
             Assert.AreEqual(new MyFrac("13/34"), res3);
         }
 
+        [TestMethod]
+        public void CTest1()
+        {
+            var f1 = new MyComplex("1 + 10i");
+            var f2 = new MyComplex("0 + -7i");
+
+            var res = f1 + f2;
+            Assert.AreEqual(new MyComplex("1+3i"), res);
+
+            var res1 = f1 - f2;
+            Assert.AreEqual(new MyComplex("1+17i"), res1);
+
+            var res2 = f1 * f2;
+            Assert.AreEqual(new MyComplex("70+-7i"), res2);
+
+            var res3 = f1 / f2;
+            Assert.AreEqual(new MyComplex($"{-10.0/7}+{1.0/7}i"), res3);
+        }
+
+        [TestMethod]
+        public void CTest2()
+        {
+            var f1 = new MyComplex("13+1,5i");
+            var f2 = new MyComplex("-3+-7i");
+
+            var res = f1 + f2;
+            Assert.AreEqual(new MyComplex("10+-5,5i"), res);
+
+            var res1 = f1 - f2;
+            Assert.AreEqual(new MyComplex("16+8,5i"), res1);
+
+            var res2 = f1 * f2;
+            Assert.AreEqual(new MyComplex("-28,5+-95,5i"), res2);
+
+            var res3 = f1 / f2;
+            Assert.AreEqual(new MyComplex($"{-99.0/116}+{173.0/116}i"), res3);
+        }
+
+        [TestMethod]
+        public void CTest3()
+        {
+            var f1 = new MyComplex("0+31i");
+            var f2 = new MyComplex("0+12i");
+
+            var res = f1 + f2;
+            Assert.AreEqual(new MyComplex("0+43i"), res);
+
+            var res1 = f1 - f2;
+            Assert.AreEqual(new MyComplex("0+19i"), res1);
+
+            var res2 = f1 * f2;
+            Assert.AreEqual(new MyComplex("-372+0i"), res2);
+
+            var res3 = f1 / f2;
+            Assert.AreEqual(new MyComplex($"{31/12.0}+{0}i"), res3);
+        }
     }
 }
